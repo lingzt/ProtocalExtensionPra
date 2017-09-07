@@ -49,5 +49,18 @@ person.weight = 130.0 // 130
 person.weight
 // 当我们把person从Person转换成PersonProtocol时 他就是只读的了
 // ❌Cannot assign to property: 'weight' is a get-only property
-(person as PersonProtocol).weight = 120
+//(person as PersonProtocol).weight = 120
 
+
+
+//通过扩展方法, 可以修改该实例self本身.但是方法前要加 mutating
+extension Person{
+    mutating func changeSelf()
+    {
+        self.height = 100
+    }
+}
+
+var anotherP = Person()
+anotherP.changeSelf()
+anotherP.height
