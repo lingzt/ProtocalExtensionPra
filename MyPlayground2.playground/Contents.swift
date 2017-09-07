@@ -4,7 +4,7 @@ import UIKit
 
 // 定义一个人属性的 protocol
 protocol PersonProperty {
-    var height: Int { get } // cm
+    var height: Int { get set} // cm
     var weight: Double { get } // kg
     // 判断体重是否合格的函数
     func isStandard() -> Bool
@@ -20,8 +20,8 @@ extension PersonProperty {
     }
 }
 struct Person: PersonProperty {
-    var height: Int
-    var weight: Double
+    var height = 178
+    var weight = 60.0
     // 如果自定义类型里面创建了遵守的 protocol 中的方法
     // 那么他将覆盖 protocol 中的方法
     //    func isStandard() -> Bool {
@@ -35,4 +35,19 @@ let testWeight = Double((p.height - 100)) * 0.9
 p.isStandard() // false
 // 同样天生具有判断是否是 Perfect Height 的属性
 p.isPerfectHeight // true
+
+
+
+var person = Person()
+person.height   // 178
+person.height = 180
+person.height  // 180
+
+person.weight // 120
+// 可读可写
+person.weight = 130.0 // 130
+person.weight
+// 当我们把person从Person转换成PersonProtocol时 他就是只读的了
+// ❌Cannot assign to property: 'weight' is a get-only property
+(person as PersonProtocol).weight = 120
 
